@@ -1,0 +1,32 @@
+{
+  "name": "music-project",
+  "version": "1.0.0",
+  "description": "Composing music through programming",
+  "main": "script.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "generate-songs": "node scripts/generate-songs.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glitcheddottiehop/music-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/glitcheddottiehop/music-project/issues"
+  },
+  "homepage": "https://github.com/glitcheddottiehop/music-project#readme",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "sass": "^1.93.2",
+    "tone": "^15.1.22",
+    "vite": "^4.5.14"
+  }
+}
