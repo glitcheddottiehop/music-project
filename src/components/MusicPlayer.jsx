@@ -15,7 +15,6 @@ export function MusicPlayer() {
   const [playbackState, setPlaybackState] = useState('stopped'); // 'playing', 'paused', 'stopped'
   const [selectedSong, setSelectedSong] = useState('twinkle');
   const [volume, setVolume] = useState(0.5);
-  const [drumsEnabled, setDrumsEnabled] = useState(false);
   
   // Refs to hold manager instances (don't recreate on every render)
   const audioManagerRef = useRef(null);
@@ -31,7 +30,7 @@ export function MusicPlayer() {
 
     // Load the default song
     const initialSong = songManagerRef.current.getCurrentSong();
-    playbackControllerRef.current.loadSong(initialSong, drumsEnabled);
+    playbackControllerRef.current.loadSong(initialSong, false);
 
     // Set initial volume
     audioManagerRef.current.setVolume(volume);
@@ -52,7 +51,7 @@ export function MusicPlayer() {
     if (songManagerRef.current && playbackControllerRef.current) {
       if (songManagerRef.current.switchSong(songKey)) {
         const newSong = songManagerRef.current.getCurrentSong();
-        playbackControllerRef.current.loadSong(newSong, drumsEnabled);
+        playbackControllerRef.current.loadSong(newSong, false);
         setSelectedSong(songKey);
         setPlaybackState('stopped');
       }
@@ -87,15 +86,6 @@ export function MusicPlayer() {
     setVolume(newVolume);
     if (audioManagerRef.current) {
       audioManagerRef.current.setVolume(newVolume);
-    }
-  };
-
-  // Handle drums toggle
-  const handleDrumsToggle = (e) => {
-    const enabled = e.target.checked;
-    setDrumsEnabled(enabled);
-    if (playbackControllerRef.current) {
-      playbackControllerRef.current.updateDrums(enabled);
     }
   };
 
@@ -160,20 +150,7 @@ export function MusicPlayer() {
           />
         </div>
         
-        <div className="drums-container">
-          <label className="checkbox-label">
-            <input 
-              type="checkbox" 
-              id="drums" 
-              checked={drumsEnabled}
-              onChange={handleDrumsToggle}
-            />
-            <span className="checkmark">🥁</span>
-            <span className="checkbox-text">Drums</span>
-          </label>
-        </div>
       </div>
     </div>
   );
 }
-
